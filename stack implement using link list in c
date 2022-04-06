@@ -1,0 +1,105 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node
+{
+
+    int data;
+    struct Node * next;
+};                                 //Daffodil International University
+                                   //Rafiul Islam Robin Khan
+                                  // 01701-729512
+
+int isEmpty(struct Node* top)
+{
+
+    if(top == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
+
+int isFull(struct Node* top)
+{
+    struct Node * ptr = (struct Node*)malloc(sizeof(struct Node));
+    if(ptr == NULL)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+}
+
+struct Node* push(struct Node* top, int data)
+{
+    if(isFull(top))
+    {
+        printf("Stack Overflow");
+    }
+    else
+    {
+
+        struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+        ptr->data = data;
+        ptr->next = top;
+        top = ptr;
+        //printf("%d\n", top->data);
+        return top;
+
+    }
+}
+
+struct Node* pop(struct Node* top)
+{
+
+    if(isEmpty(top))
+    {
+        printf("stack is Empty");
+    }
+    else
+    {
+        struct Node* ptr = top;
+
+        top =  top->next;
+        free(ptr);
+        //printf("%d\n", top->data);
+        return top;
+    }
+}
+void stackTraversal(struct Node* top)
+{
+
+    while(top != NULL)
+    {
+        printf("%d\n", top->data);
+        top = (top)->next;
+    }
+
+}
+
+int main()
+{
+    struct Node* top = NULL;
+    top = push(top,2);
+    top = push(top,20);
+    top = push(top,270);
+    stackTraversal(top);
+    printf("\n\n");
+    top = pop(top);
+    top = pop(top);
+    stackTraversal(top);
+
+    return 0;
+}
+
+
+
+
