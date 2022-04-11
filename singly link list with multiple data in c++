@@ -1,0 +1,81 @@
+#include<iostream>
+
+using namespace std;
+
+struct Node
+{
+
+    int mark;
+    string name;
+    struct Node * next;
+
+};
+
+void linkedListTraversal(struct Node * head)
+{
+
+    while(head != 0)
+    {
+
+        cout <<head->name<<" "<<head->mark<<" > ";
+        head = head->next;
+    }
+
+    cout <<"NULL"<<endl;
+
+}
+
+
+int main()
+{
+
+    int mark1, mark2, mark3, count = 0;
+    string name1, name2, name3;
+
+
+
+    cout<<"Name of First Person : ";
+    cin >>name1;
+    cout <<endl;
+
+    cout<<"Marks of First Person : ";
+    cin >>mark1;
+    cout <<endl;
+
+    cout<<"Name of Second Person : ";
+    cin >>name2;
+    cout <<endl;
+
+    cout<<"Marks of Second Person : ";
+    cin >>mark2;
+    cout <<endl;
+
+    cout<<"Name of Third Person : ";
+    cin >>name3;
+    cout <<endl;
+
+    cout<<"Marks of Third Person : ";
+    cin >>mark3;
+    cout <<endl;
+
+    struct Node * one = new Node();
+    struct Node * two = new Node();
+    struct Node * three = new Node();
+
+    one->mark = mark1;
+    two->mark = mark2;
+    three->mark = mark3;
+
+    one->name = name1;
+    two->name = name2;
+    three->name = name3;
+
+    one->next = two;
+    two->next = three;
+    three->next = NULL;
+
+    
+    linkedListTraversal(one);
+
+
+}
