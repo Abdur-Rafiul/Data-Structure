@@ -1,0 +1,163 @@
+#include<iostream>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string>
+using namespace std;
+struct Node
+{
+
+    int phone_num;
+    string name;
+    struct Node * next;
+
+};
+
+
+struct Node * CreateLinkList(struct Node *head, int phone_num, string name)
+{
+    //int i = 1;
+    struct Node * ptr = head;
+    while(head->next != NULL)
+    {
+
+        head = head->next;
+        //i++;
+    }
+
+    struct Node * p ;
+    p = (struct Node *)malloc(sizeof(struct Node));
+    head->next = p;
+    p->phone_num = phone_num;
+    p->name = name;
+
+    p->next = NULL;
+
+    return ptr;
+}
+
+
+void linkedListTraversal(struct Node *ptr)
+{
+    int i = 1;
+    while (ptr != NULL)
+    {
+        //printf("%d %s", ptr->phone_num, ptr->name);
+        printf("Friend %d:\n",i);
+        cout <<"Name: "<<ptr->name <<"\n"<<"Phone No: "<<ptr->phone_num <<"\n";
+        ptr = ptr->next;
+        printf("\n\n");
+        i++;
+
+    }
+    //printf("NULL");
+    printf("\n");
+}
+
+
+struct Node * insertAtLastNode(struct Node *head, int phone_num, string name)
+{
+    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+    ptr->phone_num = phone_num;
+    ptr->name = name;
+    struct Node * p = head;
+
+    while(p->next!=NULL)
+    {
+        p = p->next;
+    }
+    p->next = ptr;
+    ptr->next = NULL;
+    return head;
+}
+
+
+void searchName(struct Node * head, string name)
+{
+
+    while(head->next!=NULL)
+    {
+        if (head->name == name)
+
+        {
+            printf("Contact Details Found\n");
+            cout <<"Name : "<<head->name<<"\n"<<"Phone No : "<<head->phone_num;
+        }
+        head = head->next;
+    }
+
+}
+
+void searchPhoneNumber(struct Node * head, int phone_num)
+{
+
+    while(head->next!=NULL)
+    {
+        if (head->phone_num == phone_num)
+
+        {
+            printf("Contact Details Found\n");
+            cout <<"Name : "<<head->name<<"\n"<<"Phone No : "<<head->phone_num;
+        }
+        head = head->next;
+    }
+
+}
+
+int main()
+{
+    struct Node * head;
+    string name;
+    int phone_num, t;
+    head = (struct Node *)malloc(sizeof(struct Node));
+
+    printf("Number of Friends: ");
+    scanf("%d",&t);
+    printf("\n\n\n\n");
+    for(int i = 1; i<=t; i++)
+    {
+        printf("Enter Name: ");
+        //scanf("%s",&name);
+        cin>>name;
+        printf("\n");
+        printf("Enter his Phone No: ");
+        scanf("%d",&phone_num);
+        if (i==1)
+        {
+            head->phone_num = phone_num;
+            head->name = name;
+            head->next = NULL;
+        }
+        else
+        {
+
+            head = CreateLinkList(head,phone_num,name);
+        }
+        printf("\n\n");
+
+    }
+    printf("You have %d Friends in Your List\n",t);
+    linkedListTraversal(head);
+
+    // head = insertAtLastNode(head,1234,"er");
+
+    // linkedListTraversal(head);
+    int n;
+    printf("Press 1:For Search By Name\n");
+    printf("Press 2:For Search By Phone Number\n");
+    scanf("%d",&n);
+    switch(n)
+    {
+    case 1:
+        printf("Choice: 1\n");
+        printf("Enter Name You Want to Search:\n");
+        cin >> name;
+        searchName(head,name);
+        break;
+    case 2:
+        printf("Choice: 2\n");
+        printf("Enter Phone Number You Want to Search:\n");
+        cin >> phone_num;
+       searchPhoneNumber(head,phone_num);
+        break;
+    }
+}
