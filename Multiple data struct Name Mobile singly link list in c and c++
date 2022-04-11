@@ -1,0 +1,118 @@
+#include<iostream>
+#include<stdio.h>
+
+using namespace std;
+
+struct Mobile
+{
+    string model_name;
+
+    int price, code;
+
+    struct Mobile * next;
+};
+
+struct Mobile * create(struct Mobile * head, string M_Name, int price, int code)
+{
+
+    struct Mobile * p = head;
+
+    struct Mobile * ptr = new Mobile();
+
+    ptr->model_name = M_Name;
+    ptr->price = price;
+    ptr->code = code;
+
+    while(head->next != NULL)
+    {
+
+        head = head->next;
+    }
+
+    head->next = ptr;
+    ptr->next = NULL;
+
+    return p;
+};
+
+void linkedListTraversal(struct Mobile * head)
+{
+
+    int i = 1;
+    while(head != 0)
+    {
+        cout <<"Node Number is = "<<i<<endl;
+        cout <<"Model Name is "<<head->model_name<<","<<"Price is "<<head->price<<" , "<<"Code is "<<head->code;
+        head = head->next;
+        cout <<"\n\n";
+        i++;
+
+
+    }
+
+}
+
+void maximumPrize(struct Mobile * head)
+{
+
+    int max = head->price;
+    string name1;
+    while(head->next != NULL)
+    {
+
+        head = head->next;
+
+        if (max < head->price)
+        {
+
+            max = head->price;
+            name1 = head->model_name;
+        }
+    }
+
+    cout <<"Mobile Name is "<<name1<<"\n"<<"Maximum Price is "<<max;
+
+
+}
+
+int main()
+{
+    int t, price, code;
+    string name;
+    struct Mobile * head = new Mobile();
+    printf("Hi! Owner Please Enter Your List of Mobile\n\n");
+    printf("How Much Mobile Your Mobile Shore : ");
+    scanf("%d",&t);
+    printf("\n\n\n");
+    for(int i = 1; i<=t; i++)
+    {
+        printf("             Enter Your %d's Node \n\n",i);
+        printf("Enter Model Name: ");
+        cin >>name;
+
+        printf("Enter Price: ");
+        scanf("%d",&price);
+
+        printf("Enter code: ");
+        scanf("%d",&code);
+        if (i==1)
+        {
+            head->model_name = name;
+            head->price = price;
+            head->code = code;
+            head->next = NULL;
+        }
+        else
+        {
+
+            head = create(head,name, price,code);
+        }
+
+       cout <<"\n\n";
+    }
+
+        cout <<"The Link List"<<endl;
+        cout<<"\n\n";
+        linkedListTraversal(head);
+        maximumPrize(head);
+}
