@@ -1,0 +1,67 @@
+#include<iostream>
+
+using namespace std;
+
+struct Node{
+
+      int data;
+
+      struct Node * next;
+
+      struct Node * prev;
+
+};
+
+struct Node * createLinkList(struct Node * head, int data){
+
+      struct Node * p = head;
+      struct Node * ptr = new Node();
+      ptr->data = data;
+
+      while(head->next != NULL){
+        head = head->next;
+      }
+
+      head->next = ptr;
+      ptr->next = NULL;
+      head = ptr->prev;
+
+      return p;
+}
+
+void linkListTraversal(struct Node * head){
+
+             int count = 0;
+             cout <<"The Doubly Link List is\n";
+
+            while(head != NULL){
+                if (count == 0){
+                    cout <<"NULL <- ";
+                }
+                cout<<head->data<<" -> ";
+                head = head->next;
+                count ++;
+            }
+            cout <<"NULL";
+
+
+}
+
+
+
+int main()
+{
+    struct Node * head = new Node();
+    head->data = 4;
+    head->next = NULL;
+    head->prev = NULL;
+
+  head =  createLinkList(head,5);
+  head =  createLinkList(head,6);
+  head =  createLinkList(head,70);
+  head =  createLinkList(head,75);
+  head =  createLinkList(head,71);
+  linkListTraversal(head);
+  //cout<<head->next->data;
+
+}
