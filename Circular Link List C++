@@ -1,0 +1,316 @@
+#include<iostream>
+#include<math.h>
+#include<stdlib.h>
+
+using namespace std;
+
+#include<stdio.h>
+#include<stdlib.h>
+struct Node
+{
+
+    int data;
+    struct Node * next;
+
+};
+
+
+struct Node * CreateLinkList(struct Node *head, int data)
+{
+
+    struct Node * ptr = head;
+    while(head->next != ptr)
+    {
+
+        head = head->next;
+    }
+
+    struct Node * p ;
+    p = (struct Node *)malloc(sizeof(struct Node));
+    head->next = p;
+    p->data = data;
+    p->next = ptr;
+
+    return ptr;
+}
+
+
+void linkedListTraversal(struct Node *ptr)
+{
+    struct Node * p = ptr;
+
+    while (ptr->next != p)
+    {
+        printf("%d->", ptr->data);
+        ptr = ptr->next;
+    }
+
+    printf("%d", ptr->data);
+
+
+    printf("\n");
+}
+
+//Insert a Node before At First Node
+struct Node * insertAtBeginning(struct Node * head, int data)
+{
+
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+    struct Node * p = head;
+    ptr->data = data;
+
+    while(head->next != p)
+    {
+        head = head->next;
+    }
+    ptr->next = p;
+    head->next = ptr;
+
+    head = ptr;
+    return head;
+}
+
+//Insert a Node After At last Node
+struct Node * insertAtLastNode(struct Node * head, int data)
+{
+
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+    struct Node * p = head;
+    ptr->data = data;
+
+    while(head->next != p)
+    {
+        head = head->next;
+    }
+
+    ptr->next = p;
+    head->next = ptr;
+
+
+    return p;
+}
+
+//Insert a Node After a Node
+struct Node * insertAtAfterNode(struct Node * head, int data, int index)
+{
+    int i = 0;
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+    struct Node * p = head;
+
+    ptr->data = data;
+
+    while(i != index)
+    {
+        head = head->next;
+        i++;
+    }
+    struct Node * pm = head->next;
+    head->next = ptr;
+
+    ptr->next = pm;
+
+    return p;
+}
+
+//delete a node before at the Second
+struct Node * DeleteBeginningNode(struct Node * head)
+{
+    struct Node * p = head;
+    struct Node * ptr = head->next;
+
+    while(head->next != p)
+    {
+        head = head->next;
+    }
+
+    head->next = ptr;
+    free(p);
+
+    return ptr;
+
+};
+
+//delete a node before at the Second
+struct Node * DeleteLastNode(struct Node * head)
+{
+    struct Node * p = head;
+
+
+    while(head->next->next != p)
+    {
+        head = head->next;
+    }
+    struct Node * pm = head->next;
+
+
+    head->next = p;
+    free(pm);
+
+    return p;
+
+};
+
+//delete a node At Between Index
+struct Node * deleteAtIndexBetween(struct Node * head, int index)
+{
+    struct Node * p = head;
+
+    int i = 0;
+    while(i != index-1)
+    {
+
+        head = head->next;
+
+        i++;
+    }
+    struct Node * pm = head->next->next;
+    struct Node * ptr = head->next;
+
+
+    head->next = pm;
+    free(ptr);
+
+    return p;
+
+};
+
+//Update a Node in Position of  first Node
+struct Node * UpdateFirstPositionOfNode(struct Node * head, int data)
+{
+    struct Node * p = head;
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+    struct Node * pm = head->next;
+    ptr->data = data;
+    while(head->next != p){
+
+          head = head->next;
+    }
+    ptr->next = pm;
+    head->next = ptr;
+    free(p);
+
+    return ptr;
+
+};
+
+
+//Update a Node in Position of  Last Node
+struct Node * UpdateLastPositionOfNode(struct Node * head, int data)
+{
+    struct Node * p = head;
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+
+    ptr->data = data;
+    while(head->next->next != p){
+
+          head = head->next;
+    }
+    struct Node * pm = head->next;
+    head->next = ptr;
+    ptr->next = p;
+    free(pm);
+
+    return p;
+
+};
+
+//Update a Node Between At Index
+struct Node * UpdateBetweenAtIndexNode(struct Node * head, int data, int index)
+{
+    struct Node * p = head;
+    struct Node * ptr = (struct Node *)malloc(sizeof(struct Node));
+
+    ptr->data = data;
+    int i = 0;
+    while(i != index - 1){
+
+          head = head->next;
+          i++;
+    }
+    struct Node * pm = head->next->next;
+    struct Node * f = head->next;
+    head->next = ptr;
+    ptr->next = pm;
+    free(f);
+
+
+    return p;
+
+};
+
+//Searching
+void searchofNodeData(struct Node * head, int value)
+{
+    struct Node * p = head;
+    while(head->data != value && head->next != p)
+    {
+
+        head = head->next;
+
+    }
+    if(head->data == value)
+    {
+
+
+        printf("H! User Your Searching  Successfully : Your Value is = %d",head->data);
+    }
+    else
+    {
+        printf("Your Value is Missing");
+    }
+};
+
+
+int main()
+{
+    struct Node * head;
+    head = (struct Node *)malloc(sizeof(struct Node));
+    struct Node * p = head;
+    head->data = 10;
+    head->next = p;
+    //linkedListTraversal(p);
+
+    head = CreateLinkList(head,11);
+    head = CreateLinkList(head,12);
+    head = CreateLinkList(head,13);
+    head = CreateLinkList(head,14);
+    head = CreateLinkList(head,15);
+    head = CreateLinkList(head,16);
+    head = CreateLinkList(head,17);
+    linkedListTraversal(head);
+
+    // head=insertAtBeginning(head,22);
+    //head=insertAtBeginning(head,223);
+
+    // linkedListTraversal(head);
+
+    // head = insertAtLastNode(head,1);
+    // linkedListTraversal(head);
+
+    //head = insertAtAfterNode(head,2,7);
+    // linkedListTraversal(head);
+
+
+    //head = insertAtLastNode(head,1);
+    //linkedListTraversal(head);
+
+    //  head = DeleteBeginningNode(head);
+    // head = DeleteBeginningNode(head);
+    //  linkedListTraversal(head);
+    //  head = DeleteLastNode(head);
+    // linkedListTraversal(head);
+    // head = deleteAtIndexBetween(head,2);
+    // linkedListTraversal(head);
+    //searchofNodeData(head,12);
+   // head = UpdateFirstPositionOfNode(head,32);
+   // linkedListTraversal(head);
+    head = UpdateLastPositionOfNode(head,32);
+    linkedListTraversal(head);
+
+    head = UpdateBetweenAtIndexNode(head,404,6);
+    linkedListTraversal(head);
+     // head = DeleteLastNode(head);
+     //linkedListTraversal(head);
+
+}
+
