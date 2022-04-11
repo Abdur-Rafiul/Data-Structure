@@ -1,0 +1,69 @@
+#include<iostream>
+
+using namespace std;
+
+struct Node{
+
+    int data;
+    struct Node * next;
+    struct Node * prev;
+
+
+};
+
+struct Node * CreationNode(struct Node *head, int data){
+
+            struct Node * s = head;
+            struct Node * p = head;
+             struct Node * ptr = new Node();
+             ptr->data = data;
+
+             while(head->next != p){
+             // cout <<"h";
+                head = head->next;
+
+             }
+
+             head->next = ptr;
+             ptr->prev = head;
+             ptr->next = p;
+             p->prev = ptr;
+
+             return s;
+
+};
+
+   void linkListTraversal(struct Node * head){
+             struct Node * p = head;
+
+              while(head->next != p){
+
+                   cout<<head->data<<" ";
+
+                   head = head->next;
+              }
+
+               cout<<head->data<<" ";
+
+
+};
+
+int main()
+{
+   struct Node * head;
+
+   head = new Node();
+
+   head->data = 5;
+   head->next = head;
+   head->prev = head;
+
+   head = CreationNode(head,20);
+   head = CreationNode(head,4);
+   head = CreationNode(head,40);
+   head = CreationNode(head,43);
+
+   linkListTraversal(head);
+   //cout <<head->next->data;
+
+}
