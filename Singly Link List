@@ -1,0 +1,124 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+//Rafiul Islam 
+//Daffodil International University
+//01701-729512
+
+struct Node{
+
+   int data;
+   struct Node * next;
+
+};
+
+
+struct Node * CreateLinkList(struct Node *head, int data){
+
+       struct Node * ptr = head;
+       while(head->next != NULL){
+
+          head = head->next;
+       }
+
+        struct Node * p ;
+        p = (struct Node *)malloc(sizeof(struct Node));
+        head->next = p;
+        p->data = data;
+        p->next = NULL;
+
+        return ptr;
+}
+
+
+void linkedListTraversal(struct Node *ptr)
+{
+    while (ptr != NULL)
+    {
+        printf("%d->", ptr->data);
+        ptr = ptr->next;
+    }
+    printf("NULL");
+    printf("\n");
+}
+
+
+struct Node * insertAtFirst(struct Node *head, int data){
+    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+    ptr->data = data;
+
+    ptr->next = head;
+    return ptr;
+}
+
+
+struct Node * insertAtIndex(struct Node *head, int data, int index){
+    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+    struct Node * p = head;
+    int i = 0;
+
+    while (i!=index-1)
+    {
+        p = p->next;
+        i++;
+    }
+    ptr->data = data;
+    ptr->next = p->next;
+    p->next = ptr;
+    return head;
+}
+
+struct Node * insertAtEnd(struct Node *head, int data){
+    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node * p = head;
+
+    while(p->next!=NULL){
+        p = p->next;
+    }
+    p->next = ptr;
+    ptr->next = NULL;
+    return head;
+}
+
+
+  struct Node * insertAfterNode(struct Node *head, int index, int data){
+    struct Node * ptr = (struct Node *) malloc(sizeof(struct Node));
+    ptr->data = data;
+    struct Node * p = head;
+    int i = 1;
+    while(i != index){
+        p = p->next;
+        i++;
+    }
+    struct Node * s = p->next->next;
+    p->next = ptr;
+    ptr->next = s;
+
+
+
+    return head;
+}
+
+
+int main()
+{
+    struct Node * head;
+    head = (struct Node *)malloc(sizeof(struct Node));
+    head->data = 10;
+    head->next = NULL;
+
+    head = CreateLinkList(head,11);
+    head = CreateLinkList(head,12);
+    head = CreateLinkList(head,13);
+    head = CreateLinkList(head,14);
+    head = CreateLinkList(head,15);
+    head = CreateLinkList(head,16);
+    head = CreateLinkList(head,17);
+    linkedListTraversal(head);
+    //head = insertAtFirst(head,420);
+    //head =insertAtIndex(head,421,1);
+    //head = insertAtEnd(head,1);
+    head = insertAfterNode(head,3,1);
+    linkedListTraversal(head);
+}
