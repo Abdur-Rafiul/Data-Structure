@@ -1,0 +1,23 @@
+#include <stdio.h>                    
+    /*
+Daffodil International University
+       Rafiul Islam
+       01701-729512
+   */
+struct Students{
+   int  id;
+   char name[100];
+};
+int main() {
+
+    char name2[100];
+   struct Students one;
+   scanf("%d",&one.id);
+    getchar();
+   gets(one.name);
+
+
+   printf("Student Id = %d\n",one.id);
+  printf("Student Name = %s\n",one.name);
+    return 0;
+}
